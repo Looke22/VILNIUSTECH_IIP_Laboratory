@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokemon of the Day</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Pokemon of the Day</h1>
+    <p><strong>Name:</strong> {{ pokemon.name }}</p>
+    <img src="{{ pokemon.imageUrl }}" alt="Pokemon Image">
+    <p><strong>Genus:</strong> {{ pokemon.genus }}</p>
+    <p><strong>Description:</strong> {{ pokemon.description }}</p>
+    <p><strong>Stats:</strong></p>
+    <canvas id="statsChart" width="100" height="100"></canvas>
+    
+    
+
+    <script>
+        var statsData = {
+            labels: ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense', 'Speed'],
+            datasets: [{
+                label: '',
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                borderWidth: 1,
+                data: [
+                    {{ pokemon.stats['HP'] }},
+                    {{ pokemon.stats['Attack'] }},
+                    {{ pokemon.stats['Defense'] }},
+                    {{ pokemon.stats['Special Attack'] }},
+                    {{ pokemon.stats['Special Defense'] }},
+                    {{ pokemon.stats['Speed'] }}
+                ]
+            }]
+        };
+
+        var ctx = document.getElementById('statsChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: statsData,
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 10
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 10
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
