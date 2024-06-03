@@ -11,13 +11,13 @@ def connect_broker(broker_address, client_name):
 
 if __name__ == "__main__":
     server = "broker.emqx.io"
-    client_name = "Looke22"
+    client_name = "Looke22222"
     client = connect_broker(server, client_name)
     
     try:
         while True:
             message = input('Send some random message:')
-            client.publish("temperature/kambarys2", message)
+            client.publish("temperature/kambarys8", message)
             
     except KeyboardInterrupt:
         client.disconnect()
